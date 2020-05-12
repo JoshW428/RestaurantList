@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Top 10 Restaurants</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/styles.css" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <header>
+        <img src="../static/images/resto.jpg"
+             th:attr="src=@{/images/resto.jpg}" />
+    </header>
+    <main>
+        <section class="title">
+            Top 10 Restaurants
+        </section>
+        <section>
+        These are the top 10 local restaurants from as chosen by our
+        readers in our Spring <i>Lifestyle</i> survey.
+        <br>
+        Bon Appétit!
+        </section>
+
+        <section class="error" th:if="${restaurants == null}">
+            *** unable to access RestaurantList server ***
+        </section>
+
+        <section class=list th:if="${restaurants != null}">
+            <table>
+                <tr class=table-header>
+                    <td class="rank">Rank</td>
+                    <td class="data">Name</td>
+                    <td class="data">Cusine</td>
+                </tr>
+                <tr class=table-row th:each="restaurant, i : ${restaurants}">
+                    <td class="rank" th:text="${i.index + 1}"></td>
+                    <td th:text="${restaurant.name}"></td>
+                    <td th:text="${restaurant.cuisine.name}"></td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+    <footer>
+        Copyright &copy; 2020, Fake Restaurant Review Service
+    </footer>
+</body>
+</html>
