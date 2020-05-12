@@ -1,10 +1,10 @@
-# webage-bah-maven
+# webage-maven
 
 Maven application to display a web site with a list of restaurants. 
 
-Gets list of restaurants from _webage-bah-gradle_ 
+Gets list of restaurants from _webage-gradle_ 
 
-Displays an error message if _webage-bah-gradle_ is not available.
+Displays an error message if _webage-gradle_ is not available.
 
 This application depends on the following environment 
 variable _RESTAURANT_LIST_SERVICE_URL_ be set and point to
