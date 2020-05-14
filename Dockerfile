@@ -6,6 +6,6 @@ RUN mvn package spring-boot:repackage
 FROM openjdk:8-jdk-alpine
 EXPOSE 9000
 VOLUME /tmp
-ARG LIBS=app/build/libs
+ARG LIBS=app/target
 COPY --from=builder ${LIBS}/RestaurantList*.jar /app/lib/RestaurantList.jar
 ENTRYPOINT ["java","-jar","./app/lib/RestaurantWeb.jar"]
