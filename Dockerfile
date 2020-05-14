@@ -1,5 +1,10 @@
-FROM openjdk:8
-RUN mkdir -p /opt/my/service
-ADD /var/jenkins_home/workspace/RestaurantList/target/RestaurantWeb-0.0.1-SNAPSHOT.jar /opt/my/service
+FROM maven:3.6-jdk-8 AS builder
+COPY --chown=maven:maven . /app
+WORKDIR /app
+RUN mvn package spring-boot:repackage
+FROM openjdk:8-jdk-alpine
 EXPOSE 9000
-CMD ["java", "-jar", "/opt/my/service/RestaurantWeb-0.0.1-SNAPSHOT.jar"]
+VOLUME /tmp
+ARG LIBS=app/build/libs
+COPY --from=builder ${LIBS}/RestaurantWeb*.jar /app/lib/RestaurantWeb.jar
+ENTRYPOINT ["java","-jar","./app/lib/RestaurantWeb.jar"]
