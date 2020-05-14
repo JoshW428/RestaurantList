@@ -1,7 +1,8 @@
 FROM maven:3.6-jdk-8 AS builder
-COPY --chown=maven:src . /app
+COPY    . /app
 WORKDIR /app
 RUN mvn package spring-boot:repackage
+
 FROM openjdk:8-jdk-alpine
 EXPOSE 9000
 VOLUME /tmp
